@@ -15,6 +15,9 @@
 body {
   background-color: var(--primary-background);
   font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 button,
@@ -26,12 +29,40 @@ input {
   outline: none;
 }
 
-svg {
-  display: inline-block;
+h4,
+h2 {
+  /* display: inline-block; */
+  margin: 0;
 }
 
-h4 {
-  display: inline-block;
+.home-childs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 15px;
+  cursor: pointer;
+}
+
+.project-childs {
+  cursor: pointer;
+}
+#navbar {
+  border-right: 1px solid rgb(197, 196, 196);
+}
+
+.add-svg:hover,
+.add-svg:focus {
+  cursor: pointer;
+  opacity: 70%;
+  transition: 0.1s ease-in;
+}
+.home-childs:hover,
+.home-childs:focus,
+.project-childs:hover,
+.project-childs:focus {
+  transform: translate3d(0, -0.125rem, 0);
+  opacity: 72%;
+  transition: 0.1s ease-in;
 }
 
 #header-content {
@@ -39,9 +70,62 @@ h4 {
   padding: 2.375rem;
 }
 #navbar {
-  max-width: 206px;
+  max-width: 200px;
   height: 100%;
 }
-.navbar-intro {
-  font-weight: bold;
+
+section {
+  margin: 0 auto;
+  width: 80%;
+}
+
+main {
+  margin-bottom: 1em;
+}
+
+.task-container {
+  background-color: var(--primary-pink);
+  border-radius: 7px;
+}
+
+.hamburger-hidden {
+  display: none;
+}
+
+#footer a:hover {
+  opacity: 50%;
+  transition: 0.1s ease-in-out;
+}
+
+footer {
+  margin-top: auto;
+}
+.hidden {
+  display: none;
+}
+@media (max-width: 48em) {
+  /* .hamburger-hidden {
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+  } */
+  .hamburger-hidden:hover {
+    opacity: 52%;
+    transition: 0.1s ease-in;
+  }
+  /* .navbar-custom {
+    display: none;
+  } */
+  section {
+    width: 100%;
+  }
+  .task-wrapper.flex-wrap {
+    flex-wrap: nowrap;
+    align-items: left;
+    flex-direction: column;
+  }
+  .task-container {
+    min-width: 80%;
+    margin: auto;
+  }
 }
