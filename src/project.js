@@ -3,11 +3,17 @@ export default class Project {
     this.name = name;
     this.taskList = [];
   }
+
   setName(name) {
     this.name = name;
   }
+
   getName() {
     return this.name;
+  }
+
+  getTask(taskName) {
+    return this.taskList.find((task) => task.name === taskName);
   }
 
   getTasks() {
@@ -17,14 +23,8 @@ export default class Project {
   addTask(task) {
     return this.taskList.push(task);
   }
+
   removeTask(task) {
     return this.taskList.splice(this.taskList.indexOf(task));
   }
 }
-
-const newtsk = new Project("testtaskk");
-
-console.log(newtsk);
-// newtsk.addTask("blbl");s
-// newtsk.removeTask("blbl");
-console.log(newtsk.getTasks());
