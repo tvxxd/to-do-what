@@ -47,6 +47,7 @@ h2 {
 }
 #navbar {
   border-right: 1px solid rgb(197, 196, 196);
+  flex: 250px 1 0;
 }
 
 .add-svg:hover,
@@ -109,6 +110,14 @@ footer {
 
 .show {
   display: block;
+}
+.add-project-popup {
+  display: none;
+  width: 100%;
+}
+
+.add-project-popup.active {
+  display: flex;
 }
 
 @media (max-width: 48em) {
