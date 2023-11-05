@@ -4,13 +4,15 @@ export default class ToDoWhat {
   }
 
   addProject(project) {
+    if (!project) return;
     // check if project alr exists
     if (this.projects.includes(project)) return;
     this.projects.push(project);
+    return true;
   }
 
-  getProejct(projectName) {
-    this.projects.find((project) => project.name === projectName);
+  getProject(projectName) {
+    return this.projects.find((project) => project.name === projectName);
   }
 
   getProjects() {
@@ -18,10 +20,12 @@ export default class ToDoWhat {
   }
 
   removeProject(projectName) {
+    if (!projectName) return;
     // find the project in the array, if name matches, remove it
     const returnedProject = this.projects.find(
       (project) => project.name === projectName
     );
-    this.projects.splice(this.projects.indexOf(returnedProject), 1);
+    const index = this.projects.indexOf(returnedProject);
+    this.projects.splice(index, 1);
   }
 }
