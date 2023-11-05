@@ -31,7 +31,6 @@ input {
 
 h4,
 h2 {
-  /* display: inline-block; */
   margin: 0;
 }
 
@@ -104,18 +103,10 @@ footer {
   display: none;
 }
 @media (max-width: 48em) {
-  /* .hamburger-hidden {
-    display: block;
-    margin-left: auto;
-    cursor: pointer;
-  } */
   .hamburger-hidden:hover {
     opacity: 52%;
     transition: 0.1s ease-in;
   }
-  /* .navbar-custom {
-    display: none;
-  } */
   section {
     width: 100%;
   }
