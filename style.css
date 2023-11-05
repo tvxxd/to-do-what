@@ -68,10 +68,6 @@ h2 {
   background-color: var(--primary-pink);
   padding: 2.375rem;
 }
-#navbar {
-  max-width: 200px;
-  height: 100%;
-}
 
 section {
   margin: 0 auto;
@@ -85,10 +81,7 @@ main {
 .task-container {
   background-color: var(--primary-pink);
   border-radius: 7px;
-}
-
-.hamburger-hidden {
-  display: none;
+  min-width: 300px;
 }
 
 #footer a:hover {
@@ -102,8 +95,30 @@ footer {
 .hidden {
   display: none;
 }
+
+.header,
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-pink {
+  background-color: var(--primary-pink);
+}
+
+.show {
+  display: block;
+}
+
 @media (max-width: 48em) {
-  .hamburger-hidden:hover {
+  .hamburger-menu {
+    display: block;
+    justify-self: end;
+    cursor: pointer;
+  }
+
+  .hamburger-menu:hover {
     opacity: 52%;
     transition: 0.1s ease-in;
   }
@@ -118,5 +133,22 @@ footer {
   .task-container {
     min-width: 80%;
     margin: auto;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    vertical-align: top;
+  }
+  .todowhat-logo {
+    align-self: center;
+  }
+  .group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-custom {
+    display: none;
   }
 }

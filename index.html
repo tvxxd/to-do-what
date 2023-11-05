@@ -19,53 +19,64 @@
     <script defer src="main.js"></script>
   </head>
   <body>
-    <header>
-      <div
-        class="d-flex justify-content-center align-items-center header-mobile"
-        id="header-content"
-      >
-        <i class="bi bi-check2-square fs-3"></i>
-        <h1>ToDoWhat</h1>
-        <svg
-          class="hamburger-hidden"
-          width="50"
-          height="50"
-          viewBox="0 0 50 50"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6.25 12.5H43.75V16.6667H6.25V12.5ZM6.25 22.9167H43.75V27.0833H6.25V22.9167ZM6.25 33.3333H43.75V37.5H6.25V33.3333Z"
-            fill="black"
-          />
-        </svg>
+    <header class="bg-pink">
+      <div class="header container" id="header-content">
+        <div class="group">
+          <i class="bi bi-check2-square fs-3 todowhat-logo"></i>
+          <h1>ToDoWhat</h1>
+        </div>
+        <i class="bi bi-list display-5 hidden hamburger-menu"></i>
       </div>
     </header>
     <main>
       <div id="content" class="d-flex">
         <nav id="navbar" class="navbar-custom">
           <div class="home-menu p-4 d-flex flex-column row-gap-3">
-            <h2 class="fw-bold">Home</h2>
-            <div class="tasks home-childs">
+            <h3 class="fw-bold">Home</h3>
+            <button id="button-tasks-project" class="tasks home-childs">
               <i class="bi bi-list-task"></i>
-              <h4 class="fs-5">Tasks</h4>
-            </div>
-            <div class="today home-childs">
+              Tasks
+            </button>
+            <button id="button-today-project" class="today home-childs">
               <i class="bi bi-calendar-date"></i>
-              <h4 class="fs-5">Today</h4>
-            </div>
-            <div class="this-week home-childs">
+              Today
+            </button>
+            <button id="button-week-project" class="this-week home-childs">
               <i class="bi bi-calendar3-week"></i>
-              <h4 class="fs-5">This Week</h4>
-            </div>
+              This Week
+            </button>
           </div>
           <div class="projects d-flex flex-column row-gap-3">
-            <div class="d-flex justify-content-around align-items-end">
-              <h2 class="fw-bold mx-3">Projects</h2>
+            <div class="d-flex justify-content-between align-items-center px-4">
+              <h3 class="fw-bold">Projects</h3>
               <i class="bi bi-plus-square-fill add-svg fs-5"></i>
             </div>
             <div
-              class="d-block my-2 mx-auto justify-content-center column-gap-2 align-items-center project-childs"
+              class="add-project-popup input-group mx-auto justify-content-center"
+            >
+              <input
+                type="text"
+                class="add-project-popup-input w-75 my-2 rounded-2 p-2"
+                placeholder="Title"
+                aria-label="Recipient's username with two button addons"
+              />
+              <div class="add-project-popup-buttons text-center">
+                <button
+                  class="btn btn-success btn-outline-secondary text-light"
+                  type="button"
+                >
+                  Add
+                </button>
+                <button
+                  class="btn btn-danger btn-outline-secondary text-light"
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+            <div
+              class="d-block my-1 mx-auto justify-content-center column-gap-1 align-items-center project-childs"
             >
               <i class="bi bi-list-task"></i>
               <p class="m-0 d-inline-block">Test</p>
@@ -99,48 +110,7 @@
           style="cursor: pointer; text-decoration: none"
           href="https://github.com/tvxxd"
         >
-          <svg
-            width="28"
-            height="27"
-            viewBox="0 0 28 27"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M13.9665 0C6.25403 0 0 6.19703 0 13.8418C0 19.9575 4.00182 25.146 9.55114 26.9762C10.2491 27.1042 10.5054 26.676 10.5054 26.3104C10.5054 25.9802 10.4925 24.8899 10.4864 23.7334C6.60094 24.5706 5.78105 22.1001 5.78105 22.1001C5.14574 20.5003 4.23033 20.0749 4.23033 20.0749C2.96316 19.2157 4.32585 19.2334 4.32585 19.2334C5.72833 19.3307 6.46679 20.6601 6.46679 20.6601C7.71247 22.7758 9.73409 22.164 10.5311 21.8104C10.6564 20.9158 11.0184 20.3049 11.4178 19.9596C8.31564 19.6095 5.05461 18.4226 5.05461 13.1188C5.05461 11.6076 5.60019 10.3729 6.49362 9.40352C6.34862 9.05466 5.87056 7.64704 6.62892 5.74044C6.62892 5.74044 7.80175 5.36842 10.4707 7.15928C11.5848 6.85258 12.7796 6.69877 13.9665 6.69351C15.1534 6.69877 16.3491 6.85258 17.4653 7.15928C20.1311 5.36842 21.3021 5.74044 21.3021 5.74044C22.0625 7.64704 21.5842 9.05466 21.4391 9.40352C22.3345 10.3729 22.8766 11.6076 22.8766 13.1188C22.8766 18.4352 19.6093 19.6057 16.4992 19.9485C17.0002 20.3781 17.4465 21.2205 17.4465 22.5118C17.4465 24.3639 17.4304 25.8544 17.4304 26.3104C17.4304 26.6786 17.6818 27.1103 18.3897 26.9743C23.936 25.1421 27.9326 19.9554 27.9326 13.8418C27.9326 6.19703 21.6796 0 13.9665 0Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M5.28982 19.8737C5.25906 19.9427 5.1499 19.9631 5.05044 19.9158C4.94915 19.8708 4.89224 19.7771 4.92508 19.7081C4.95515 19.6374 5.06455 19.6177 5.16562 19.6648C5.26716 19.7102 5.32497 19.8048 5.28982 19.8737Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M5.85553 20.499C5.78893 20.5603 5.65871 20.5318 5.57036 20.435C5.47902 20.3387 5.4619 20.2095 5.52944 20.1474C5.59812 20.0865 5.7244 20.1152 5.81599 20.2114C5.90735 20.309 5.92515 20.4371 5.85553 20.499Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M6.40622 21.2963C6.32065 21.3552 6.18073 21.3 6.09423 21.1768C6.00864 21.0538 6.00866 20.9061 6.09608 20.847C6.18281 20.788 6.32065 20.8412 6.4083 20.9633C6.49364 21.0883 6.49364 21.2361 6.40622 21.2963Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M7.16064 22.0665C7.08409 22.1502 6.92103 22.1277 6.80169 22.0135C6.67959 21.9019 6.64559 21.7435 6.72236 21.6598C6.79984 21.576 6.96382 21.5997 7.08409 21.7127C7.20527 21.8243 7.24227 21.9837 7.16064 22.0665Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M8.20135 22.5137C8.16758 22.6221 8.01053 22.6714 7.85233 22.6253C7.69438 22.5778 7.59098 22.4509 7.62292 22.3412C7.65574 22.2321 7.81349 22.1809 7.97282 22.23C8.13057 22.2773 8.23419 22.4035 8.20135 22.5137Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M9.34437 22.5965C9.3483 22.7107 9.21415 22.8054 9.0481 22.8075C8.88112 22.811 8.74604 22.7188 8.7442 22.6065C8.7442 22.4912 8.87533 22.3974 9.04231 22.3946C9.20838 22.3914 9.34437 22.4831 9.34437 22.5965Z"
-              fill="#1B1817"
-            />
-            <path
-              d="M10.408 22.4172C10.4279 22.5285 10.3124 22.6429 10.1475 22.6735C9.98541 22.7027 9.83533 22.6341 9.81475 22.5235C9.79462 22.4093 9.9121 22.2949 10.074 22.2655C10.2391 22.237 10.3869 22.3039 10.408 22.4172Z"
-              fill="#1B1817"
-            />
-          </svg>
+          <i class="bi bi-github text-black"></i>
         </a>
         <p class="m-0 d-inline-block">| 2023 &copy; tvxxd</p>
       </div>
