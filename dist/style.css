@@ -45,9 +45,13 @@ h2 {
 .project-childs {
   cursor: pointer;
 }
-#navbar {
+.navbar-custom {
   border-right: 1px solid rgb(197, 196, 196);
   flex: 250px 1 0;
+}
+
+.navbar-custom.active-block {
+  display: block;
 }
 
 .add-svg:hover,
@@ -116,12 +120,20 @@ footer {
   width: 100%;
 }
 
-.add-project-popup.active {
-  display: flex;
+.add-task-popup {
+  display: none;
 }
 
-@media (max-width: 48em) {
-  .hamburger-menu {
+.add-project-popup.active,
+.add-task-popup.active {
+  display: flex;
+}
+.hamburger-menu {
+  display: none;
+}
+
+@media (max-width: 55em) {
+  .hamburger-menu.active {
     display: block;
     justify-self: end;
     cursor: pointer;

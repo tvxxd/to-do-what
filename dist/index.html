@@ -25,7 +25,9 @@
           <i class="bi bi-check2-square fs-3 todowhat-logo"></i>
           <h1>ToDoWhat</h1>
         </div>
-        <i class="bi bi-list display-5 hidden hamburger-menu"></i>
+        <button id="hamburger-menu" class="bg-pink hamburger-menu active">
+          <i class="bi bi-list display-5"></i>
+        </button>
       </div>
     </header>
     <main>
@@ -64,7 +66,7 @@
               />
               <div class="add-project-popup-buttons text-center">
                 <button
-                  class="btn btn-success btn-outline-secondary text-light"
+                  class="btn btn-success btn-outline-secondary text-light add-project-popup-button"
                   type="button"
                 >
                   Add
@@ -95,7 +97,34 @@
             </button>
           </div>
           <div
-            class="d-flex flex-wrap gap-3 justify-content-around task-wrapper"
+            class="add-task-popup flex-column flex-md-row text-center justify-content-around align-items-center"
+          >
+            <input
+              class="add-task-popup-input w-75 my-2 rounded-2 p-2"
+              type="text"
+              name="add-task-popup-input"
+              placeholder="Title"
+              id="add-task-popup-input"
+            />
+            <div
+              class="d-flex gap-1 justify-content-center text-center my-auto add-task-popup-buttons"
+            >
+              <button
+                class="btn btn-success btn-outline-secondary text-light add-task-pupup-button"
+                type="button"
+              >
+                Add
+              </button>
+              <button
+                class="btn btn-danger btn-outline-secondary text-light close-task-popup-button"
+                type="button"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+          <div
+            class="d-flex flex-wrap gap-3 justify-content-around task-wrapper my-2"
           >
             <div class="w-25 p-3 border task-container">
               <p class="m-0 my-3 text-center text-break">Read book</p>

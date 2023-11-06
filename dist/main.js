@@ -16,7 +16,17 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ui_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui.js */ \"./src/ui.js\");\n\r\n(0,_ui_js__WEBPACK_IMPORTED_MODULE_0__.hamburgerMenu)();\r\n\n\n//# sourceURL=webpack://todowhat/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ \"./src/ui.js\");\n\r\ndocument.addEventListener(\"DOMContentLoaded\", _ui__WEBPACK_IMPORTED_MODULE_0__[\"default\"].render());\r\n\n\n//# sourceURL=webpack://todowhat/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/storage.js":
+/*!************************!*\
+  !*** ./src/storage.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Storage)\n/* harmony export */ });\nclass Storage {\r\n  static loadData() {}\r\n}\r\n\n\n//# sourceURL=webpack://todowhat/./src/storage.js?");
 
 /***/ }),
 
@@ -26,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ui_
   \*******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   hamburgerMenu: () => (/* binding */ hamburgerMenu)\n/* harmony export */ });\nconst hamburgerMenu = function () {\r\n  const menu = document.querySelector(\".hamburger\");\r\n  const navbar = document.querySelector(\".navbar-custom\");\r\n\r\n  console.log(menu);\r\n  menu.addEventListener(\"click\", (e) => {\r\n    navbar.classList.toggle(\"hidden\");\r\n  });\r\n};\r\n\n\n//# sourceURL=webpack://todowhat/./src/ui.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ UI)\n/* harmony export */ });\n/* harmony import */ var _storage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage.js */ \"./src/storage.js\");\n\r\nconst MIN_SCREEN_WIDTH = 881;\r\nclass UI {\r\n  static render() {\r\n    // UI.renderContent(Storage.loadData());\r\n    UI.initialButtons();\r\n  }\r\n\r\n  static initialButtons() {\r\n    // add projects popup - close\r\n    const closePopUpButton = document.querySelector(\".close-popup-button\");\r\n    closePopUpButton.addEventListener(\"click\", UI.closeAddProjectPopUp);\r\n\r\n    // add projects popup - open\r\n    const addProjectButton = document.getElementById(\"add-project-button\");\r\n    addProjectButton.addEventListener(\"click\", UI.openAddProjectPopUp);\r\n\r\n    // add task popup open\r\n    const taskOpenPopUpButton = document.querySelector(\".add-task-button\");\r\n    taskOpenPopUpButton.addEventListener(\"click\", UI.openAddTaskPopUp);\r\n\r\n    // add task popup close\r\n    const taskClosePopUpButton = document.querySelector(\r\n      \".close-task-popup-button\"\r\n    );\r\n    taskClosePopUpButton.addEventListener(\"click\", UI.closeAddTaskPopUp);\r\n\r\n    //hamburger menu toggle\r\n    const hamburgerMenu = document.querySelector(\".hamburger-menu\");\r\n    hamburgerMenu.addEventListener(\"click\", UI.controlNavbarMenu);\r\n  }\r\n\r\n  static openAddProjectPopUp() {\r\n    const addProjectPopUp = document.querySelector(\".add-project-popup\");\r\n    addProjectPopUp.classList.add(\"active\");\r\n    this.classList.add(\"active\");\r\n  }\r\n\r\n  static closeAddProjectPopUp() {\r\n    const addProjectPopUp = document.querySelector(\".add-project-popup\");\r\n    addProjectPopUp.classList.remove(\"active\");\r\n\r\n    const addProjectInput = document.querySelector(\".add-project-popup-input\");\r\n    addProjectInput.value = \"\";\r\n\r\n    const addProjectButton = document.getElementById(\"add-project-button\");\r\n    addProjectButton.classList.remove(\"active\");\r\n  }\r\n\r\n  static closeAddTaskPopUp() {\r\n    const addTaskPopUp = document.querySelector(\".add-task-popup\");\r\n    addTaskPopUp.classList.remove(\"active\");\r\n\r\n    const addTaskInput = document.querySelector(\".add-task-popup-input\");\r\n    addTaskInput.value = \"\";\r\n\r\n    const addTaskButton = document.querySelector(\".add-task-button\");\r\n    addTaskButton.classList.remove(\"active\");\r\n  }\r\n\r\n  static openAddTaskPopUp() {\r\n    const addTaskPopUp = document.querySelector(\".add-task-popup\");\r\n    addTaskPopUp.classList.add(\"active\");\r\n    this.classList.add(\"active\");\r\n  }\r\n\r\n  static controlNavbarMenu() {\r\n    const navbar = document.querySelector(\".navbar-custom\");\r\n    if (navbar.style.display === \"block\") {\r\n      navbar.style.display = \"none\";\r\n    } else {\r\n      navbar.style.display = \"block\";\r\n    }\r\n    window.addEventListener(\"resize\", UI.checksScreenSize);\r\n  }\r\n  static checksScreenSize() {\r\n    if (window.innerWidth > MIN_SCREEN_WIDTH) {\r\n      navbar.style.display = \"block\";\r\n    } else {\r\n      navbar.style.display = \"none\";\r\n    }\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack://todowhat/./src/ui.js?");
 
 /***/ })
 
