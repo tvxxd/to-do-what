@@ -107,7 +107,7 @@ export default class UI {
 
   static createProject(name) {
     const userProjects = document.querySelector(".projects");
-    userProjects.innerHTML += `
+    const html = `
     <div class="my-1 project-childs mx-auto">
     <button
       class="px-3 project-button d-flex align-items-center column-gap-5"
@@ -122,5 +122,6 @@ export default class UI {
     </button>
   </div>
     `;
+    userProjects.insertAdjacentHTML("beforeend", html);
   }
 }
