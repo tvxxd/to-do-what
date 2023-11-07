@@ -1,7 +1,7 @@
 import Storage from "./storage.js";
 const MIN_SCREEN_WIDTH = 881;
 export default class UI {
-  static render() {
+  static load() {
     // UI.renderContent(Storage.loadData());
     UI.initialButtons();
   }
@@ -28,10 +28,18 @@ export default class UI {
     //hamburger menu toggle
     const hamburgerMenu = document.querySelector(".hamburger-menu");
     hamburgerMenu.addEventListener("click", UI.controlNavbarMenu);
+
+    // add project
+    const addProjectPopUpButton = document.querySelector(
+      ".add-project-popup-button"
+    );
+    addProjectPopUpButton.addEventListener("click", UI.addProject);
   }
 
   static openAddProjectPopUp() {
+    console.log("openning");
     const addProjectPopUp = document.querySelector(".add-project-popup");
+    console.log(addProjectPopUp);
     addProjectPopUp.classList.add("active");
     this.classList.add("active");
   }
@@ -43,8 +51,8 @@ export default class UI {
     const addProjectInput = document.querySelector(".add-project-popup-input");
     addProjectInput.value = "";
 
-    const addProjectButton = document.getElementById("add-project-button");
-    addProjectButton.classList.remove("active");
+    // const addProjectButton = document.querySelector(".add-project-button");
+    // addProjectButton.classList.remove("active");
   }
 
   static closeAddTaskPopUp() {
@@ -74,10 +82,45 @@ export default class UI {
     window.addEventListener("resize", UI.checksScreenSize);
   }
   static checksScreenSize() {
+    const navbar = document.querySelector(".navbar-custom");
     if (window.innerWidth > MIN_SCREEN_WIDTH) {
       navbar.style.display = "block";
     } else {
       navbar.style.display = "none";
     }
+  }
+
+  static addProject() {
+    const addProjectPopUpInput = document.querySelector(
+      ".add-project-popup-input"
+    );
+    if (addProjectPopUpInput.value == "") {
+      alert(`Can't be empty`);
+    } else if (addProjectPopUpInput.value.length >= 15) {
+      alert("Name must be less than 15");
+      addProjectPopUpInput.value = "";
+    } else {
+      UI.createProject(addProjectPopUpInput.value);
+      UI.closeAddProjectPopUp();
+    }
+  }
+
+  static createProject(name) {
+    const userProjects = document.querySelector(".projects");
+    userProjects.innerHTML += `
+    <div class="my-1 project-childs mx-auto">
+    <button
+      class="px-3 project-button d-flex align-items-center column-gap-5"
+    >
+      <div class="left-side">
+        <i class="bi bi-list-task"></i>
+        <p class="m-0 d-inline-block text-break">${name}</p>
+      </div>
+      <div class="right-side">
+        <i class="bi bi-x-square-fill"></i>
+      </div>
+    </button>
+  </div>
+    `;
   }
 }

@@ -4,7 +4,12 @@
   --primary-pink: #faebd7;
   --primary-background: #eeeeee;
 }
-
+img,
+video,
+iframe {
+  max-inline-size: 100%;
+  block-size: auto;
+}
 *,
 *::after,
 *::before {
@@ -61,12 +66,23 @@ h2 {
   transition: 0.1s ease-in;
 }
 .home-childs:hover,
-.home-childs:focus,
-.project-childs:hover,
-.project-childs:focus {
+.home-childs:focus {
   transform: translate3d(0, -0.125rem, 0);
   opacity: 72%;
   transition: 0.1s ease-in;
+}
+
+.project-childs:hover,
+.project-childs:focus {
+  opacity: 72%;
+  transition: 0.1s ease-in;
+}
+.right-side {
+  visibility: hidden;
+}
+
+.project-button:hover .right-side {
+  visibility: visible;
 }
 
 #header-content {
