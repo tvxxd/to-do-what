@@ -1,3 +1,5 @@
+import Project from "./project";
+
 export default class ToDoWhat {
   constructor() {
     this.projects = [];
@@ -12,7 +14,14 @@ export default class ToDoWhat {
   }
 
   getProject(projectName) {
-    return this.projects.find((project) => project.name === projectName);
+    return Object.assign(
+      new Project(),
+      this.projects.find((project) => project.name === projectName)
+    );
+  }
+
+  has(projectName) {
+    return this.projects.some((project) => project.name === projectName);
   }
 
   getProjects() {

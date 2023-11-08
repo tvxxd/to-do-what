@@ -1,9 +1,18 @@
+import Project from "./project.js";
 import Storage from "./storage.js";
+import toDoWhat from "./toDoWhat.js";
+import Task from "./task.js";
 const MIN_SCREEN_WIDTH = 881;
 export default class UI {
   static load() {
-    // UI.renderContent(Storage.loadData());
+    UI.loadProjects();
     UI.initialButtons();
+  }
+
+  static loadProjects() {
+    Storage.getData()
+      .getProjects()
+      .forEach((project) => this.createProject(project.name));
   }
 
   static initialButtons() {
@@ -37,9 +46,7 @@ export default class UI {
   }
 
   static openAddProjectPopUp() {
-    console.log("openning");
     const addProjectPopUp = document.querySelector(".add-project-popup");
-    console.log(addProjectPopUp);
     addProjectPopUp.classList.add("active");
     this.classList.add("active");
   }
@@ -50,9 +57,6 @@ export default class UI {
 
     const addProjectInput = document.querySelector(".add-project-popup-input");
     addProjectInput.value = "";
-
-    // const addProjectButton = document.querySelector(".add-project-button");
-    // addProjectButton.classList.remove("active");
   }
 
   static closeAddTaskPopUp() {
@@ -61,9 +65,6 @@ export default class UI {
 
     const addTaskInput = document.querySelector(".add-task-popup-input");
     addTaskInput.value = "";
-
-    const addTaskButton = document.querySelector(".add-task-button");
-    addTaskButton.classList.remove("active");
   }
 
   static openAddTaskPopUp() {
@@ -94,24 +95,24 @@ export default class UI {
     const addProjectPopUpInput = document.querySelector(
       ".add-project-popup-input"
     );
-    if (addProjectPopUpInput.value == "") {
-      alert(`Can't be empty`);
-    } else if (addProjectPopUpInput.value.length >= 15) {
-      alert("Name must be less than 15");
-      addProjectPopUpInput.value = "";
-    } else {
-      UI.createProject(addProjectPopUpInput.value);
-      UI.closeAddProjectPopUp();
+    const projectName = addProjectPopUpInput.value;
+    if (projectName !== "" && !Storage.getData().has(projectName)) {
+      UI.createProject(projectName);
+      Storage.addProject(new Project(projectName));
     }
+    UI.closeAddProjectPopUp();
   }
 
   static createProject(name) {
     const userProjects = document.querySelector(".projects");
+    const div = document.createElement("div");
+    let classes = ["my-1", "project-childs", "mx-auto", "user-project"];
+    div.classList.add(...classes);
+    userProjects.appendChild(div);
     const html = `
-    <div class="my-1 project-childs mx-auto">
     <button
       class="px-3 project-button d-flex align-items-center column-gap-5"
-    >
+      data-project-button>
       <div class="left-side">
         <i class="bi bi-list-task"></i>
         <p class="m-0 d-inline-block text-break">${name}</p>
@@ -120,8 +121,18 @@ export default class UI {
         <i class="bi bi-x-square-fill"></i>
       </div>
     </button>
-  </div>
     `;
-    userProjects.insertAdjacentHTML("beforeend", html);
+    div.insertAdjacentHTML("beforeend", html);
+  }
+
+  clear() {
+    const userProjects = document.querySelector(".user-project");
+    userProjects.textContent = "";
+  }
+
+  removeProject(projectName) {
+    Storage.removeProject(projectName);
+    UI.loadProjects();
+    UI.clear();
   }
 }
