@@ -148,6 +148,10 @@ footer {
   display: none;
 }
 
+button {
+  background-color: var(--primary-background);
+}
+
 @media (max-width: 55em) {
   .hamburger-menu.active {
     display: block;
@@ -187,5 +191,12 @@ footer {
   }
   .navbar-custom {
     display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--primary-background);
+  }
+  button {
+    background-color: var(--primary-background);
   }
 }
