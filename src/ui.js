@@ -1,6 +1,6 @@
 import Project from "./project.js";
 import Storage from "./storage.js";
-import toDoWhat from "./toDoWhat.js";
+import ToDoWhat from "./toDoWhat.js";
 import Task from "./task.js";
 const MIN_SCREEN_WIDTH = 881;
 export default class UI {
@@ -12,7 +12,7 @@ export default class UI {
   static loadProjects() {
     Storage.getData()
       .getProjects()
-      .forEach((project) => this.createProject(project.name));
+      .forEach((project) => UI.createProject(project.name));
   }
 
   static initialButtons() {
