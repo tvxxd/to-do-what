@@ -9,6 +9,8 @@ export default class UI {
     UI.initialButtons();
   }
 
+  static loadTasks() {}
+
   static loadProjects() {
     Storage.getData()
       .getProjects()
@@ -43,6 +45,12 @@ export default class UI {
       ".add-project-popup-button"
     );
     addProjectPopUpButton.addEventListener("click", UI.addProject);
+
+    // delete project
+    const projectButtons = document.querySelectorAll("[data-project-button]");
+    projectButtons.forEach((btn) => {
+      btn.addEventListener("click", UI.handleProjectDeleteButton);
+    });
   }
 
   static openAddProjectPopUp() {
@@ -104,12 +112,12 @@ export default class UI {
   }
 
   static createProject(name) {
-    const userProjects = document.querySelector(".projects");
+    const projects = document.querySelector(".projects");
     const div = document.createElement("div");
     let classes = ["my-1", "project-childs", "mx-auto", "user-project"];
     div.classList.add(...classes);
-    userProjects.appendChild(div);
-    const html = `
+    projects.appendChild(div);
+    div.innerHTML += `
     <button
       class="px-3 project-button d-flex align-items-center column-gap-5"
       data-project-button>
@@ -122,17 +130,29 @@ export default class UI {
       </div>
     </button>
     `;
-    div.insertAdjacentHTML("beforeend", html);
+    UI.initialButtons();
+  }
+  static clear() {
+    UI.clearProjects();
+    UI.clearTasks();
   }
 
-  clear() {
+  static clearTasks() {}
+  static clearProjects() {
     const userProjects = document.querySelector(".user-project");
-    userProjects.textContent = "";
+    userProjects.remove();
   }
 
-  removeProject(projectName) {
+  static removeProject(projectName) {
     Storage.removeProject(projectName);
-    UI.loadProjects();
     UI.clear();
+    UI.loadProjects();
+  }
+  static handleProjectDeleteButton(event) {
+    const projectName = this.children[0].children[1].textContent;
+    if (event.target.classList.contains("bi")) {
+      UI.removeProject(projectName);
+      return;
+    }
   }
 }
