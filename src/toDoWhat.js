@@ -3,6 +3,7 @@ import Project from "./project";
 export default class ToDoWhat {
   constructor() {
     this.projects = [];
+    this.projects.push('myProject')
   }
 
   addProject(project) {

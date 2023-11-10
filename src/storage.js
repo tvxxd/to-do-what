@@ -10,26 +10,23 @@ export default class Storage {
     );
   }
   static addProject(project) {
-    let todoWhat = Object.assign(new ToDoWhat(), Storage.getData());
-    if (!Storage.getData()) {
-      todoWhat = Object.assign(new ToDoWhat(), Storage.getData());
-    }
+    let todoWhat = Storage.getData();
     todoWhat.addProject(project);
     Storage.saveData(todoWhat);
   }
 
   static removeProject(project) {
-    let todoWhat = Object.assign(new ToDoWhat(), Storage.getData());
+    let todoWhat = Storage.getData();
     todoWhat.removeProject(project);
     Storage.saveData(todoWhat);
   }
   static addTask(projectName, task) {
-    let todoWhat = Object.assign(new ToDoWhat(), Storage.getData());
+    let todoWhat = Storage.getData();
     todoWhat.getProject(projectName).addTask(task);
     Storage.saveData(todoWhat);
   }
   static removeTask(projectName, task) {
-    let todoWhat = Object.assign(new ToDoWhat(), Storage.getData());
+    let todoWhat = Storage.getData();
     todoWhat.getProject(projectName).removeTask(task);
     Storage.saveData(todoWhat);
   }

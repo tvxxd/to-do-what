@@ -9,7 +9,12 @@ export default class UI {
     UI.initialButtons();
   }
 
-  static loadTasks() {}
+  static loadTasks(projectName) {
+    Storage.getData()
+      .getProject(projectName)
+      .getTasks()
+      .forEach((task) => UI.createTask(task.name, task.date, task.details));
+  }
 
   static loadProjects() {
     Storage.getData()
@@ -27,7 +32,7 @@ export default class UI {
     addProjectButton.addEventListener("click", UI.openAddProjectPopUp);
 
     // add task popup open
-    const taskOpenPopUpButton = document.querySelector(".add-task-button");
+    const taskOpenPopUpButton = document.getElementById("add-task-button");
     taskOpenPopUpButton.addEventListener("click", UI.openAddTaskPopUp);
 
     // add task popup close
@@ -51,6 +56,10 @@ export default class UI {
     projectButtons.forEach((btn) => {
       btn.addEventListener("click", UI.handleProjectDeleteButton);
     });
+
+    // add Task
+    const addTaskPopUpButton = document.querySelector(".add-task-popup-button");
+    addTaskPopUpButton.addEventListener("click", UI.addTask);
   }
 
   static openAddProjectPopUp() {
@@ -73,6 +82,11 @@ export default class UI {
 
     const addTaskInput = document.querySelector(".add-task-popup-input");
     addTaskInput.value = "";
+
+    const detailsInput = document.querySelector(
+      ".add-task-popup-input-details"
+    );
+    detailsInput.value = "";
   }
 
   static openAddTaskPopUp() {
@@ -105,8 +119,8 @@ export default class UI {
     );
     const projectName = addProjectPopUpInput.value;
     if (projectName !== "" && !Storage.getData().has(projectName)) {
-      UI.createProject(projectName);
       Storage.addProject(new Project(projectName));
+      UI.createProject(projectName);
     }
     UI.closeAddProjectPopUp();
   }
@@ -131,6 +145,36 @@ export default class UI {
     </button>
     `;
     UI.initialButtons();
+  }
+
+  static createTask(name, date, details) {
+    const tasks = document.querySelector(".task-section");
+    tasks.innerHTML += `<div class="w-25 p-3 border task-container">
+    <p class="m-0 my-3 text-center text-break">${name}</p>
+    <p class="m-0 my-1">Due Date: ${date}</p>
+    <p class="m-0 text-break">
+      Details: ${details}
+    </p>
+  </div>`;
+    UI.initialButtons();
+  }
+  static addTask() {
+    const addTaskInput = document.getElementById("add-task-popup-input");
+    const inputValue = addTaskInput.value;
+
+    const details = document.querySelector(".add-task-popup-input-details");
+    const detailsValue = details.value;
+
+    const projectName = document.querySelector(".project-name").textContent;
+    console.log(projectName);
+    if (
+      inputValue !== "" &&
+      !Storage.getData().getProject(projectName).has(inputValue)
+    ) {
+      Storage.addTask(projectName, new Task(inputValue));
+      UI.createTask(inputValue, "Date not Specified", detailsValue);
+    }
+    UI.closeAddTaskPopUp();
   }
   static clear() {
     UI.clearProjects();
