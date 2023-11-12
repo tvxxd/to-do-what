@@ -1,8 +1,8 @@
 export default class Task {
-  constructor(name, date = "Date not Specified", details) {
+  constructor(name, details, date = "Date not Specified") {
     this.name = name;
-    this.date = date;
     this.details = details;
+    this.date = date;
   }
 
   setName(name) {
@@ -15,7 +15,7 @@ export default class Task {
     this.details = details;
   }
   getDetails() {
-    return this.getDetails;
+    return this.details;
   }
   setDate(date) {
     this.date = date;

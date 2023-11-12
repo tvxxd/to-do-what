@@ -6,17 +6,22 @@ const MIN_SCREEN_WIDTH = 881;
 export default class UI {
   static load() {
     UI.loadProjects();
+    // UI.loadTasks('t');
+    UI.loadTasks();
     UI.initialButtons();
   }
 
-  static loadTasks(projectName) {
+  static loadTasks() {
     Storage.getData()
-      .getProject(projectName)
-      .getTasks()
-      .forEach((task) => UI.createTask(task.name, task.date, task.details));
+      .getProjects()
+      .forEach((project) => {
+        project.taskList.forEach((task) =>
+          UI.createTask(task.name, task.details, task.date)
+        );
+      });
   }
 
-  static loadProjects() {
+  static loadProjects(projectName) {
     Storage.getData()
       .getProjects()
       .forEach((project) => UI.createProject(project.name));
@@ -60,6 +65,12 @@ export default class UI {
     // add Task
     const addTaskPopUpButton = document.querySelector(".add-task-popup-button");
     addTaskPopUpButton.addEventListener("click", UI.addTask);
+
+    //delete task
+    const deleteTaskButtons = document.querySelectorAll("[data-task-button]");
+    deleteTaskButtons.forEach((btn) => {
+      btn.addEventListener("click", UI.removeTask);
+    });
   }
 
   static openAddProjectPopUp() {
@@ -137,7 +148,7 @@ export default class UI {
       data-project-button>
       <div class="left-side">
         <i class="bi bi-list-task"></i>
-        <p class="m-0 d-inline-block text-break">${name}</p>
+        <p class="m-0 d-inline-block text-break project-name">${name}</p>
       </div>
       <div class="right-side">
         <i class="bi bi-x-square-fill"></i>
@@ -147,10 +158,11 @@ export default class UI {
     UI.initialButtons();
   }
 
-  static createTask(name, date, details) {
+  static createTask(name, details, date) {
     const tasks = document.querySelector(".task-section");
     tasks.innerHTML += `<div class="w-25 p-3 border task-container">
-    <p class="m-0 my-3 text-center text-break">${name}</p>
+    <button class="bg-pink float-end" data-task-button><i class="bi bi-x-square-fill"></i></i></button>
+    <p class="m-0 my-3 text-center text-break task-name">${name}</p>
     <p class="m-0 my-1">Due Date: ${date}</p>
     <p class="m-0 text-break">
       Details: ${details}
@@ -165,14 +177,22 @@ export default class UI {
     const details = document.querySelector(".add-task-popup-input-details");
     const detailsValue = details.value;
 
+    const projects = Storage.getData().getProjects();
+    if (projects.length === 0) {
+      alert("first add a project");
+      UI.closeAddTaskPopUp();
+      return;
+    }
+
     const projectName = document.querySelector(".project-name").textContent;
-    console.log(projectName);
+
     if (
+      detailsValue !== "" &&
       inputValue !== "" &&
       !Storage.getData().getProject(projectName).has(inputValue)
     ) {
-      Storage.addTask(projectName, new Task(inputValue));
-      UI.createTask(inputValue, "Date not Specified", detailsValue);
+      Storage.addTask(projectName, new Task(inputValue, detailsValue));
+      UI.createTask(inputValue, detailsValue, "Date not Specified");
     }
     UI.closeAddTaskPopUp();
   }
@@ -181,7 +201,19 @@ export default class UI {
     UI.clearTasks();
   }
 
-  static clearTasks() {}
+  static removeTask() {
+    const projectName = document.querySelector(".project-name").textContent;
+    const taskName = document.querySelector(".task-name").textContent;
+
+    Storage.removeTask(projectName, taskName);
+    UI.clearTasks();
+    UI.loadTasks();
+  }
+  static clearTasks() {
+    const userTasks = document.querySelector(".task-section");
+    userTasks.textContent = "";
+  }
+
   static clearProjects() {
     const userProjects = document.querySelector(".user-project");
     userProjects.remove();

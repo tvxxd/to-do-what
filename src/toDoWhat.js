@@ -3,15 +3,14 @@ import Project from "./project";
 export default class ToDoWhat {
   constructor() {
     this.projects = [];
-    this.projects.push('myProject')
   }
 
-  addProject(project) {
-    if (!project) return;
-    // check if project alr exists
-    if (this.projects.includes(project)) return;
-    this.projects.push(project);
-    return true;
+  addProject(newProject) {
+    if (!newProject) return;
+    if (this.projects.find((project) => project.name === newProject.name)) {
+      return;
+    }
+    this.projects.push(newProject);
   }
 
   getProject(projectName) {
