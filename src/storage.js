@@ -30,4 +30,10 @@ export default class Storage {
     todoWhat.getProject(projectName).removeTask(task);
     Storage.saveData(todoWhat);
   }
+
+  static setTaskDate(projectName, taskName, newDate) {
+    let todoWhat = Storage.getData();
+    todoWhat.getProject(projectName).setTaskDate(taskName, newDate);
+    Storage.saveData(todoWhat);
+  }
 }

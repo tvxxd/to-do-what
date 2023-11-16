@@ -36,4 +36,7 @@ export default class Project {
   removeTask(task) {
     return this.taskList.splice(this.taskList.indexOf(task));
   }
+  setTaskDate(taskName, newDate) {
+    this.taskList.find((task) => task.name === taskName).date = newDate;
+  }
 }

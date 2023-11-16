@@ -6,7 +6,6 @@ const MIN_SCREEN_WIDTH = 881;
 export default class UI {
   static load() {
     UI.loadProjects();
-    // UI.loadTasks('t');
     UI.loadTasks();
     UI.initialButtons();
   }
@@ -70,6 +69,14 @@ export default class UI {
     const deleteTaskButtons = document.querySelectorAll("[data-task-button]");
     deleteTaskButtons.forEach((btn) => {
       btn.addEventListener("click", UI.removeTask);
+    });
+
+    //add date
+    // const dueDateButton = document.querySelector("due-date-button");
+    // dueDateButton.addEventListener("click", UI.setTaskDate);
+    const dueDateInputs = document.querySelectorAll("[data-input-due-date");
+    dueDateInputs.forEach((input) => {
+      input.addEventListener("change", UI.setTaskDate);
     });
   }
 
@@ -163,11 +170,16 @@ export default class UI {
     tasks.innerHTML += `<div class="w-25 p-3 border task-container">
     <button class="bg-pink float-end" data-task-button><i class="bi bi-x-square-fill"></i></i></button>
     <p class="m-0 my-3 text-center text-break task-name">${name}</p>
-    <p class="m-0 my-1">Due Date: ${date}</p>
+    <p id="due-date" class="m-0 my-1">Due Date: ${date}</p>
+    <div class="due-date-popup" id="due-date-popup">
+        <input data-input-due-date type="date" class="input-due-date my-auto" id="input-due-date" value="2023-11-16">
+      </div>
     <p class="m-0 text-break">
       Details: ${details}
     </p>
-  </div>`;
+  </div>
+  `;
+
     UI.initialButtons();
   }
   static addTask() {
@@ -192,7 +204,7 @@ export default class UI {
       !Storage.getData().getProject(projectName).has(inputValue)
     ) {
       Storage.addTask(projectName, new Task(inputValue, detailsValue));
-      UI.createTask(inputValue, detailsValue, "Date not Specified");
+      UI.createTask(inputValue, detailsValue, "Not specified");
     }
     UI.closeAddTaskPopUp();
   }
@@ -230,5 +242,16 @@ export default class UI {
       UI.removeProject(projectName);
       return;
     }
+  }
+
+  static closeSetDateInput() {}
+
+  static setTaskDate() {
+    const projectName = document.querySelector(".project-name").textContent;
+    const taskName = document.querySelector(".task-name").textContent;
+    const newDate = this.value;
+    Storage.setTaskDate(projectName, taskName, newDate);
+    UI.clearTasks();
+    UI.loadTasks();
   }
 }

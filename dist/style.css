@@ -152,6 +152,27 @@ button {
   background-color: var(--primary-background);
 }
 
+.due-date-popup {
+  display: flex;
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.due-date-popup.active {
+  display: flex;
+}
+
+.due-date-popup input {
+  border: 1px solid #555;
+  color: inherit;
+  font-family: inherit;
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin-top: 0.5rem;
+  /* background-color: var(--secondary-light); */
+  outline: none;
+}
+
 @media (max-width: 55em) {
   .hamburger-menu.active {
     display: block;
